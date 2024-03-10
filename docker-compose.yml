@@ -1,0 +1,28 @@
+version: '3'
+services:
+  node:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    container_name: node
+    restart: on-failure:5
+    environment:
+      - PORT=3000
+    ports:
+      - 3000:3000
+    volumes:
+      - "./node:/usr/src/node"
+      - "/usr/src/node/node_modules"
+  node-signal:
+    build:
+      context: ./node
+      dockerfile: Dockerfile_signal
+    container_name: node-signal
+    restart: on-failure:5
+    environment:
+      - PORT=4000
+    ports:
+      - 4000:4000
+    volumes:
+      - "./node:/usr/src/signal"
+      - "/usr/src/signal/node_modules"

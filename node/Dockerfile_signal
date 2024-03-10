@@ -1,0 +1,12 @@
+FROM node:18.19.1-alpine
+
+WORKDIR /usr/src/signal
+
+COPY ./package-lock.json ./package-lock.json
+COPY ./*.* ./
+
+RUN npm i
+
+COPY . .
+
+ENTRYPOINT ["node", "/usr/src/signal/node_modules/.bin/nodemon", "--legacy-watch" ,"./src/index.ts"]
